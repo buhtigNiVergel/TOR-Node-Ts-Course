@@ -1,5 +1,5 @@
 import "dotenv/config";
-import express, { type Express, type Request, type Response } from 'express';
+import express, { type Express, type Request, type Response, type NextFunction} from 'express';
 
 const app: Express = express();
 
@@ -10,6 +10,12 @@ import indexRouter from '../routes/indexRouter.js'
 app.use("/authors", authorRouter)
 app.use("/books", bookRouter);
 app.use("/", indexRouter)
+// Every thrown error in the application or the previous middleware function calling `next` with an error as an argument will eventually go to this middleware function
+app.use((err:Error, req : Request, res : Response, next : NextFunction) => {
+  console.error(err);
+  res.status(err.statusCode || 500).send(err.message);
+});
+
 
 const PORT = Number(process.env.PORT) || 5000;
 app.listen(PORT, (error) => {
