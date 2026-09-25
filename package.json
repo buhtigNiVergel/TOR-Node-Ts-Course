@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/buhtigNiVergel/TOR-Node-Ts-Course#readme",
   "dependencies": {
+    "dotenv": "^18.0.3",
     "express": "^5.2.1"
   },
   "devDependencies": {

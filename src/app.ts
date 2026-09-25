@@ -1,13 +1,18 @@
-import express from "express";
-
+import "dotenv/config";
+import express from "express"
 const app = express();
 
-const PORT = 3000;
+console.log("PORT:", process.env.PORT);
 
-app.get("/", (req, res) => {
-    res.send("Hello, Express + TypeScript + ESM!");
-});
+app.get("/", (req, res) => res.send("Hello, world!"));
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+const PORT = Number(process.env.PORT) || 5000;
+app.listen(PORT, (error) => {
+  // This is important!
+  // Without this, any startup errors will silently fail
+  // instead of giving you a helpful error message.
+  if (error) {
+    throw error;
+  }
+  console.log(`My first Express app - listening on port ${PORT}!`);
 });
