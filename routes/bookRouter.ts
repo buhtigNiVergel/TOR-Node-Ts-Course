@@ -2,7 +2,7 @@ import express, { type Request, type Response, type NextFunction, Router } from 
 
 const bookRouter = Router();
 
-bookRouter.get('/books', (req: Request, res: Response) => {
+bookRouter.get('/', (req: Request, res: Response) => {
     res.send("all books");
 });
 
