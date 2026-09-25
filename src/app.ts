@@ -1,10 +1,15 @@
 import "dotenv/config";
-import express from "express"
-const app = express();
+import express, { type Express, type Request, type Response } from 'express';
 
-console.log("PORT:", process.env.PORT);
+const app: Express = express();
 
-app.get("/", (req, res) => res.send("Hello, world!"));
+import authorRouter from '../routes/authorRouter.js'
+import bookRouter from '../routes/bookRouter.js'
+import indexRouter from '../routes/indexRouter.js'
+
+app.use("/authors", authorRouter)
+app.use("/books", bookRouter);
+app.use("/", indexRouter)
 
 const PORT = Number(process.env.PORT) || 5000;
 app.listen(PORT, (error) => {
