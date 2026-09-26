@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express, { type Express, type Request, type Response, type NextFunction} from 'express';
+import CustomNotFoundError from "../errors/CustomNotFoundError.js";
 
 const app: Express = express();
 
@@ -11,7 +12,7 @@ app.use("/authors", authorRouter)
 app.use("/books", bookRouter);
 app.use("/", indexRouter)
 // Every thrown error in the application or the previous middleware function calling `next` with an error as an argument will eventually go to this middleware function
-app.use((err:Error, req : Request, res : Response, next : NextFunction) => {
+app.use((err: CustomNotFoundError, req : Request, res : Response, next : NextFunction) => {
   console.error(err);
   res.status(err.statusCode || 500).send(err.message);
 });
